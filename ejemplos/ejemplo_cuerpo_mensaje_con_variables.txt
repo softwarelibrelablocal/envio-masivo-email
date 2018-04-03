@@ -1,0 +1,7 @@
+<p>Hola estimado {{nombre}} {{apellidos}}</p>
+<p>Estos son los datos:</p>
+<p>Email: {{email}}</p>
+<p>Aux1: {{aux1}}</p>
+<p>Aux2: {{aux2}}</p>
+<p>Aux3: {{aux3}}</p>
+<p>Un saludo.</br>Gracias.</p>
