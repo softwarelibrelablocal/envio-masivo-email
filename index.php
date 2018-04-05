@@ -71,17 +71,19 @@ if($password == 'ayto17'){
     <script src="js/jquery-1.11.1.min.js"></script>
 	<script src="js/jquery.scrollTo.min.js"></script>
 	<script src="js/bootstrap.js"></script>
+	
+	
+
+	<!-- include summernote css/js -->
+	<link href="summernote/summernote.css" rel="stylesheet">
+	<script src="summernote/summernote.js"></script>
 <?php
 	if($_SESSION["sesion"]){
 ?>
 	<script>
 	
 	var listado = new Array();
-	
-	//listado[0] = ["", "Apellidos0", "","A123456789012","",""];
-	//listado[1] = ["", "Apellidos1", "","B123456789012","",""];
-	//listado[2] = ["", "Apellidos2", "","B123456789012","",""];
-	
+		
 	var json_datos = '';
 	var obj_datos = '';
 	var numero_datos = 0;
@@ -111,8 +113,10 @@ if($password == 'ayto17'){
 		});
 	
 		$('#cargar_emails_prueba').click(function(){
-			$('#fichero_datos').text("email1@dominio.com" + "\n" + "email2@dominio.com");			
+			$('#fichero_datos').text("correo1@dominio.com" + "\n" + "correo2@dominio.com");			
 		});
+		
+		$('.summernote').summernote();
 			
 	});
 
@@ -275,7 +279,7 @@ if($password == 'ayto17'){
 		<div style="float: left; width: 90%;">
 			<label for="cuerpo_mensaje">Cuerpo del mensaje: </label>
 			
-			<textarea class="form-control" rows="15" placeholder="Cuerpo del mensaje (acepta HTML)" id="cuerpo_mensaje" name="cuerpo_mensaje" required="required"></textarea>
+			<textarea class="form-control summernote" rows="15" placeholder="Cuerpo del mensaje (acepta HTML)" id="cuerpo_mensaje" name="cuerpo_mensaje" required="required"></textarea>
 		</div>
 		<div style="float: left; width: 200; font-size: 12px; padding: 30px 10px;">Variables:<br><span style="color: #999;">{{email}}<br>{{nombre}}<br>{{apellidos}}<br>{{aux1}}<br>{{aux2}}<br>{{aux3}}</span></div>
 		<div style="clear: both;"></div>
