@@ -10,9 +10,10 @@ if(!$_SESSION["sesion"]){
 $_SESSION["asunto"] =  $_POST['asunto'];
 $_SESSION["email_emisor"] = $_POST['email_emisor'];
 $_SESSION["cuerpo_mensaje"] = $_POST['cuerpo_mensaje'];
+$_SESSION["duplicados"] = $_POST['duplicados'];
 
 if($_SESSION["asunto"] == '' || $_SESSION["email_emisor"] == '' || $_SESSION["cuerpo_mensaje"] == '' ){
-	die('Faltan datos. Pulse volver del navegador');
+	die('<p>Faltan datos. Pulse volver del navegador</p><p><a href="index.php">P&aacute;gina principal</a></p>');
 }
 
 
@@ -83,6 +84,8 @@ if($_SESSION["asunto"] == '' || $_SESSION["email_emisor"] == '' || $_SESSION["cu
 	
 	var elemento_actual = 0;
 	
+	var duplicados = '<?php echo($_SESSION["duplicados"]); ?>';
+	
 	var pausa = 0;
 	
 	
@@ -137,14 +140,14 @@ if($_SESSION["asunto"] == '' || $_SESSION["email_emisor"] == '' || $_SESSION["cu
 			$('#fila_resultado_' + elemento_actual).html('Procesando...');			
 			drawszlider(total_elementos, elemento_actual);
 			$('#progreso_numeros').html('Procesados: <b>' + elemento_actual + '</b> de ' + total_elementos);
-			ajax_api('ayto17',obj_datos[elemento_actual][1],obj_datos[elemento_actual][2],obj_datos[elemento_actual][0],obj_datos[elemento_actual][3],obj_datos[elemento_actual][4],obj_datos[elemento_actual][5]);
+			ajax_api('ayto17',obj_datos[elemento_actual][1],obj_datos[elemento_actual][2],obj_datos[elemento_actual][0],obj_datos[elemento_actual][3],obj_datos[elemento_actual][4],obj_datos[elemento_actual][5],duplicados);
 		}
 
 		//eval("ajax_api('ayto17',obj_datos." + elemento_actual + ".nombre,obj_datos." + elemento_actual + ".apellido1 + ' ' + obj_datos." + elemento_actual + ".apellido2,obj_datos." + elemento_actual + ".rfc,obj_datos." + elemento_actual + ".curp,obj_datos." + elemento_actual + ".email,obj_datos." + elemento_actual + ".telefono);");
 	}
 
 	
-	function ajax_api(password,nombre,apellidos,email,aux1,aux2,aux3){	
+	function ajax_api(password,nombre,apellidos,email,aux1,aux2,aux3,duplicados){	
 		estatus_ajax = 1;
 		//alert(accion);
 		var formURL = 'http://intranet/temp/enviomail/mandar_email.php';
@@ -160,7 +163,7 @@ if($_SESSION["asunto"] == '' || $_SESSION["email_emisor"] == '' || $_SESSION["cu
 			url : formURL,
 			type: "POST",
 			dataType : "json",
-			data: { password: password,comprobar:1,nombre: nombre,apellidos: apellidos,email: email, aux1: aux1, aux2: aux2, aux3: aux3},
+			data: { password: password,duplicados:duplicados,nombre: nombre,apellidos: apellidos,email: email, aux1: aux1, aux2: aux2, aux3: aux3},
 			success:function(data, textStatus, jqXHR)
 			{
 				
@@ -259,6 +262,9 @@ if($_SESSION["asunto"] == '' || $_SESSION["email_emisor"] == '' || $_SESSION["cu
 	}else{
 ?>
 <div id="contenedor_global" style="margin: 50px;">
+	
+	<p><a href="index.php">P&aacute;gina principal</a></p>
+	<br><br>
 	<button id="pausa">Pausar</button>
 
 	<div style="width:80%; text-align: center;" id="progreso_numeros">

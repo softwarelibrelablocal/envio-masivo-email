@@ -5,9 +5,6 @@ session_start();
 
 $password = $_POST['password'];
 
-
-$_SESSION["sesion"] = false;
-
 $_SESSION["registro"] = '';
 
 $_SESSION["datos"] = '';
@@ -17,11 +14,14 @@ $_SESSION["asunto"] = '';
 $_SESSION["email_emisor"] = '';
 $_SESSION["cuerpo_mensaje"] = '';
 
+$_SESSION["duplicados"] = '';
+
 
 
 if($password == 'ayto17'){
 	$_SESSION["sesion"] = true;
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -193,7 +193,14 @@ if($password == 'ayto17'){
 		
 		for(i=0;i<Object.keys(obj_datos).length;i++){
 						
-			$('#tabla_datos > tbody:last-child').append('<tr id="fila_' + i + '" class="tr_dato"><td>' + obj_datos[i][0] + '</td><td>' + obj_datos[i][1] + '</td><td>' + obj_datos[i][2] + '</td><td>' + obj_datos[i][3] + '</td>' + '</td><td>' + obj_datos[i][4] + '</td>' + '</td><td>' + obj_datos[i][5] + '</td>' + '</tr>');
+			var email = obj_datos[i][0];
+			var nombre = obj_datos[i][1];
+			var apellidos = obj_datos[i][2];
+			var aux1 = obj_datos[i][3];
+			var aux2 = obj_datos[i][4];
+			var aux3 = obj_datos[i][5];
+			
+			$('#tabla_datos > tbody:last-child').append('<tr id="fila_' + i + '" class="tr_dato"><td>' + email + '</td><td>' + nombre + '</td><td>' + apellidos + '</td><td>' + aux1 + '</td>' + '</td><td>' + aux2 + '</td>' + '</td><td>' + aux3 + '</td>' + '</tr>');
 			
 		}
 	}
@@ -269,9 +276,14 @@ if($password == 'ayto17'){
 			
 			<textarea class="form-control" rows="15" placeholder="Cuerpo del mensaje (acepta HTML)" id="cuerpo_mensaje" name="cuerpo_mensaje" required="required"></textarea>
 		</div>
-		<div style="float: left; width: 200; font-size: 12px; padding: 30px 10px;">Variables:<br><span style="color: #999;">{{email}}<br>{{nombre}}<br>{{apellidos}}<br>{{aux1}}<br>{{aux2}}<br>{{aux3}})</span></div>
+		<div style="float: left; width: 200; font-size: 12px; padding: 30px 10px;">Variables:<br><span style="color: #999;">{{email}}<br>{{nombre}}<br>{{apellidos}}<br>{{aux1}}<br>{{aux2}}<br>{{aux3}}</span></div>
 		<div style="clear: both;"></div>
 	  </div>
+	  <div class="checkbox">
+			<label>
+				<input type="checkbox" value="1" name="duplicados" id="duplicados"> No permitir duplicados (se comprueba AUX1 que no se repita).
+			</label>
+		</div>
 	  <div style="text-align: center; margin: 30px auto;"><button type="submit" class="btn btn-success" style="margin: auto; padding: 15px; font-size: 1.3em;">PROCEDER AL ENVÍO</button></div>
 </div>
 </form>

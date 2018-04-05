@@ -31,19 +31,22 @@ if($_SESSION["asunto"] == '' || $_SESSION["email_emisor"] == '' || $_SESSION["cu
 
 $nombre = $_POST['nombre'];
 $apellidos = $_POST['apellidos'];
+
 $email = $_POST['email'];
+$email = trim($email);
+$email = str_replace(';','',$email);
+$email = strtolower($email);
 $email =  sanitize_email($email);
+
 $aux1 = $_POST['aux1'];
 $aux2 = $_POST['aux2'];
 $aux3 = $_POST['aux3'];
 
-$comprobar = $_POST['comprobar'];
+$duplicados = $_POST['duplicados'];
 
-$pausa = 1;//pausa en segundos
+//descomentar si se quiere duplicados que se ha mandado antes
 
-//descomentar si se quiere comprobar que se ha mandado antes
-
-if($comprobar == 1){
+if($duplicados == 1){
 	//comprobamos que no está dado de alta en la api
 	//$filename = "registro.txt";
 	//$fh = fopen($filename, 'r');
@@ -62,7 +65,7 @@ if($comprobar == 1){
 	}
 }
 
-
+$pausa = 1;
 sleep($pausa);
 
 
@@ -75,7 +78,7 @@ try {
     //Server settings
    // $mail->SMTPDebug = 2;                                 // Enable verbose debug output
     $mail->isSMTP();                                      // Set mailer to use SMTP
-    $mail->Host = '10.0.0.0';  // Specify main ip or domain SMTP servers
+    $mail->Host = '10.0.0.1';  // Ip o dominio SMTP server
     $mail->SMTPAuth = false;                               // Enable SMTP authentication
     $mail->Username = $_SESSION["email_emisor"];                 // SMTP username
     $mail->Password = '';                           // SMTP password
@@ -83,11 +86,9 @@ try {
     $mail->Port = 25;                                    // TCP port to connect to
 
     //Recipients
-    $mail->setFrom($_SESSION["email_emisor"], 'AYUNTAMIENTO DE RIVAS VACIAMADRID');
+    $mail->setFrom($_SESSION["email_emisor"], 'NOMBRE DEL REMITENTE');
     $mail->addAddress($email);     // Add a recipient
-    $mail->addReplyTo($_SESSION["email_emisor"], 'AYUNTAMIENTO DE RIVAS VACIAMADRID');
-    //$mail->addCC('ricardoalfarovega@gmail.com');
-    //$mail->addBCC('brobles@rivasciudad.es');
+    $mail->addReplyTo($_SESSION["email_emisor"], 'NOMBRE DEL REMITENTE');
 
     //Attachments
     //$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
