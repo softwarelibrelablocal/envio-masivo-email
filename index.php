@@ -65,6 +65,10 @@ if($password == 'ayto17'){
 			left: 25px;
 			position: relative;
 			top: -25px; }
+			
+		.note-editable {
+			min-height: 200px;
+		}
 
 	
 	</style>
@@ -279,7 +283,7 @@ if($password == 'ayto17'){
 		<div style="float: left; width: 90%;">
 			<label for="cuerpo_mensaje">Cuerpo del mensaje: </label>
 			
-			<textarea class="form-control summernote" style="min-height: 200px;" rows="15" placeholder="Cuerpo del mensaje (acepta HTML)" id="cuerpo_mensaje" name="cuerpo_mensaje" required="required"></textarea>
+			<textarea class="form-control summernote" rows="15" placeholder="Cuerpo del mensaje (acepta HTML)" id="cuerpo_mensaje" name="cuerpo_mensaje" required="required"></textarea>
 		</div>
 		<div style="float: left; width: 200; font-size: 12px; padding: 30px 10px;">Variables:<br><span style="color: #999;">{{email}}<br>{{nombre}}<br>{{apellidos}}<br>{{aux1}}<br>{{aux2}}<br>{{aux3}}</span></div>
 		<div style="clear: both;"></div>
