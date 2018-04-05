@@ -244,7 +244,7 @@ if($password == 'ayto17'){
   
   <textarea class="form-control" rows="15" placeholder="Pegar fichero csv separado por ;" id="fichero_datos" name="fichero_datos"></textarea>
   
-  <p><a href="javascript:void(null);" id="cargar_emails_prueba">Cargar emails de para probar</a></p>
+  <p><a href="javascript:void(null);" id="cargar_emails_prueba">Cargar emails para hacer envío de prueba</a></p>
 
   <div style="text-align: center; margin: 30px auto;"><button type="button" class="btn btn-primary" style="padding: 15px;" id="subir_ficheroDatos">Crear lista de emails</button></div>
  
