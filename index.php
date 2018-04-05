@@ -109,7 +109,10 @@ if($password == 'ayto17'){
 		$('#subir_ficheroDatos').click(function(){
 			ajax_guardarDatos();			
 		});
-
+	
+		$('#cargar_emails_prueba').click(function(){
+			$('#fichero_datos').text("email1@dominio.com" + "\n" + "email2@dominio.com");			
+		});
 			
 	});
 
@@ -230,16 +233,14 @@ if($password == 'ayto17'){
 	}else{
 ?>
 <div style="padding: 10px; width: 900px; margin:50px auto; border: 1px solid #ccc;">
-<form method="post" action="cliente.php">
-  <div style="display: none;">
-	  <h2>1.- Borrar fichero de registro</h2>
-	  <button type="button" class="btn btn-success" id="borrar_registro">Borar fichero registro</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="resultado_borrarRegistro" style="padding: 8px; background-color: #5cb85c; color: #fff; display: none; font-size: 1.3em;"></span>
-  </div>
-  
+<form method="post" action="cliente.php"> 
   <h2 style="margin-top: 30px;">1.- Crear lista de emails.</h2>
-  <p><span style="color: #aaa; font-size: 1em;">(formato csv ';' con campos email;nombre;apellidos;aux1;aux2;aux3)</span></p>
+  <p><span style="color: #777; font-size: 1em;">Formato: &nbsp;&nbsp;&nbsp;&nbsp; <b>email@dominio.com;nombre;apellidos;aux1;aux2;aux3</b></span></p>
+  <p><span style="color: #777; font-size: 1em;">Nota: Si no necesita parámetros pegue directamente la columna de emails desde el excel.</span></p>
   
-  <textarea class="form-control" rows="15" placeholder="Fichero csv separado por ;" id="fichero_datos" name="fichero_datos"></textarea>
+  <textarea class="form-control" rows="15" placeholder="Pegar fichero csv separado por ;" id="fichero_datos" name="fichero_datos"></textarea>
+  
+  <p><a href="javascript:void(null);" id="cargar_emails_prueba">Cargar emails de para probar</a></p>
 
   <div style="text-align: center; margin: 30px auto;"><button type="button" class="btn btn-primary" style="padding: 15px;" id="subir_ficheroDatos">Crear lista de emails</button></div>
  
@@ -281,7 +282,7 @@ if($password == 'ayto17'){
 	  </div>
 	  <div class="checkbox">
 			<label>
-				<input type="checkbox" value="1" name="duplicados" id="duplicados"> No permitir duplicados (se comprueba AUX1 que no se repita).
+				<input type="checkbox" value="1" name="duplicados" id="duplicados"> No enviar los duplicados en columna Aux1.
 			</label>
 		</div>
 	  <div style="text-align: center; margin: 30px auto;"><button type="submit" class="btn btn-success" style="margin: auto; padding: 15px; font-size: 1.3em;">PROCEDER AL ENVÍO</button></div>
